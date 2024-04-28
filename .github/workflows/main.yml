@@ -32,8 +32,6 @@ jobs:
       - name: Set repository name as env variable
         run: echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
 
-      - name: Give permission
-        run: chmod +x ./gradlew
         
       - name: Set Up JDK
         uses: actions/setup-java@v4
@@ -41,6 +39,9 @@ jobs:
           distribution: 'zulu' # See 'Supported distributions' for available options
           java-version: '17'
           cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
